@@ -23,35 +23,16 @@ class NoteFormWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => SingleChildScrollView(
-    child: Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            children: [
-              Switch(
-                value: isImportant ?? false,
-                onChanged: onChangedImportant,
-              ),
-              Expanded(
-                child: Slider(
-                  value: (number ?? 0).toDouble(),
-                  min: 0,
-                  max: 5,
-                  divisions: 5,
-                  onChanged: (number) => onChangedNumber(number.toInt()),
-                ),
-              )
-            ],
-          ),
-          buildTitle(),
-          const SizedBox(height: 8),
-          buildDescription(),
-          const SizedBox(height: 16),
-        ],
-      ),
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.all(16),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        buildTitle(),
+        const SizedBox(height: 8),
+        buildDescription(),
+        const SizedBox(height: 16),
+      ],
     ),
   );
 
