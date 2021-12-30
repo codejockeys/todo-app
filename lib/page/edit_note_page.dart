@@ -10,6 +10,7 @@ class AddEditNotePage extends StatefulWidget {
     Key? key,
     this.note,
   }) : super(key: key);
+
   @override
   _AddEditNotePageState createState() => _AddEditNotePageState();
 }
@@ -32,26 +33,31 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      actions: [buildButton()],
-    ),
-    body: Form(
-      key: _formKey,
-      child: NoteFormWidget(
-        isImportant: isImportant,
-        number: number,
-        title: title,
-        description: description,
-        onChangedImportant: (isImportant) =>
-            setState(() => this.isImportant = isImportant),
-        onChangedNumber: (number) => setState(() => this.number = number),
-        onChangedTitle: (title) => setState(() => this.title = title),
-        onChangedDescription: (description) =>
-            setState(() => this.description = description),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Add new Note"),
       ),
-    ),
-  );
+      body: Form(
+        key: _formKey,
+        child: NoteFormWidget(
+          isImportant: isImportant,
+          number: number,
+          title: title,
+          description: description,
+          onChangedImportant: (isImportant) =>
+              setState(() => this.isImportant = isImportant),
+          onChangedNumber: (number) => setState(() => this.number = number),
+          onChangedTitle: (title) => setState(() => this.title = title),
+          onChangedDescription: (description) =>
+              setState(() => this.description = description),
+        ),
+      ),
+      persistentFooterButtons: [
+        buildButton()
+      ],
+    );
+  }
 
   Widget buildButton() {
     final isFormValid = title.isNotEmpty && description.isNotEmpty;
@@ -60,11 +66,13 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          onPrimary: Colors.white,
-          primary: isFormValid ? null : Colors.grey.shade700,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          primary: const Color(0xff1db954),
         ),
         onPressed: addOrUpdateNote,
-        child: const Text('Save'),
+        child: const Text('Save Note'),
       ),
     );
   }

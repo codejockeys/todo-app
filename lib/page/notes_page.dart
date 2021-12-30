@@ -3,7 +3,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../db/notes_database.dart';
 import '../model/note.dart';
 import '../page/edit_note_page.dart';
-import '../page/note_detail_page.dart';
 import '../widget/note_card_widget.dart';
 
 class NotesPage extends StatefulWidget {
@@ -43,10 +42,9 @@ class _NotesPageState extends State<NotesPage> {
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
       title: const Text(
-        'Notes',
+        'Your Notes',
         style: TextStyle(fontSize: 24),
       ),
-      actions: const [Icon(Icons.search), SizedBox(width: 12)],
     ),
     body: Center(
       child: isLoading
@@ -59,13 +57,12 @@ class _NotesPageState extends State<NotesPage> {
           : buildNotes(),
     ),
     floatingActionButton: FloatingActionButton(
-      backgroundColor: Colors.black,
-      child: const Icon(Icons.add),
+      backgroundColor: const Color(0xff1db954),
+      child: const Icon(Icons.note_add),
       onPressed: () async {
         await Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const AddEditNotePage()),
         );
-
         refreshNotes();
       },
     ),
@@ -81,16 +78,7 @@ class _NotesPageState extends State<NotesPage> {
     itemBuilder: (context, index) {
       final note = notes[index];
 
-      return GestureDetector(
-        onTap: () async {
-          await Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => NoteDetailPage(noteId: note.id!),
-          ));
-
-          refreshNotes();
-        },
-        child: NoteCardWidget(note: note, index: index),
-      );
+      return NoteCardWidget(note: note, index: index);
     },
   );
 }
