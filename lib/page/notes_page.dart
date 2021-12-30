@@ -68,16 +68,11 @@ class _NotesPageState extends State<NotesPage> {
     ),
   );
 
-  Widget buildNotes() => StaggeredGridView.countBuilder(
+  Widget buildNotes() => ListView.builder(
     padding: const EdgeInsets.all(8),
     itemCount: notes.length,
-    staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
-    crossAxisCount: 4,
-    mainAxisSpacing: 4,
-    crossAxisSpacing: 4,
     itemBuilder: (context, index) {
       final note = notes[index];
-
       return NoteCardWidget(note: note, index: index);
     },
   );

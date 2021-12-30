@@ -22,31 +22,11 @@ class NoteCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Pick colors from the accent colors based on index
-    final color = _lightColors[index % _lightColors.length];
-    final minHeight = getMinHeight(index);
 
-    return Card(
-      color: color,
-      child: Container(
-        constraints: BoxConstraints(minHeight: minHeight),
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 4),
-            Text(
-              note.title,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ),
+    return ListTile(
+      title:  Text(note.title),
+      subtitle: Text(note.description),
+
     );
   }
 
